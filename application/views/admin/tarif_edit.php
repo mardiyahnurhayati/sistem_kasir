@@ -12,7 +12,7 @@
         
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Tambah Data Motor</h1>
+                <h1 class="page-header">Update Data Tarif</h1>
             </div>
         </div><!--/.row-->    
 
@@ -20,21 +20,20 @@
         <div class="panel panel-default">  
             <div class="panel panel-body">
             
-        <form method="post" action="<?php echo base_url()."index.php/Admin/insert_motor"; ?>">
-
+        <form method="post" action="<?php echo base_url()."index.php/Admin/update_tarif"; ?>">
           <div class="form-group row">
-            <label for="plat" class="col-sm-2 col-form-label">Plat Motor</label>
+            <label for="merek" class="col-sm-2 col-form-label">ID Tarif</label>
             <div class="col-sm-10">
-              <input type="text"  name="platnomor" class="form-control" id="plat" placeholder="">
+              <input type="text"  readonly="readonly" name="id_tarif" class="form-control" id="id_tarif" placeholder="" value="<?php echo $id_tarif?>">
             </div>
           </div>
 
-           <div class="form-group row">
+          <div class="form-group row">
             <label for="plat" class="col-sm-2 col-form-label">Merek Motor</label>
             <div class="col-sm-10">
-              <input list="list_motor" type="text"  name="id_merk" class="form-control" id="merek" placeholder="">
+              <input list="list_motor" type="text"  name="id_merk" class="form-control" id="merek" placeholder="" value="<?php echo $id_merk?>">
               <datalist id="list_motor">
-                <?php foreach ($merk as $value) {?>
+                <?php foreach ($data as $value) {?>
                   
                 
                   <option value="<?=$value['id_merk']?>"><?=$value['merk_motor']?></option><?php } ?>
@@ -43,16 +42,22 @@
           </div>
 
           <div class="form-group row">
-            <label for="warna" class="col-sm-2 col-form-label">Warna</label>
+            <label for="plat" class="col-sm-2 col-form-label">Lama Pinjam</label>
             <div class="col-sm-10">
-              <input type="text"  name="warna" class="form-control" id="warna" placeholder="">
+              <input list="list_jam" type="text"  name="id_jam" class="form-control" id="jam" placeholder="" value="<?php echo $id_jam?>">
+              <datalist id="list_jam">
+                <?php foreach ($jam as $value) {?>
+                  
+                
+                  <option value="<?=$value['id_jam']?>"><?=$value['jam']?></option><?php } ?>
+                </datalist>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="warna" class="col-sm-2 col-form-label">Tahun Terbit</label>
+            <label for="merek" class="col-sm-2 col-form-label">Tarif</label>
             <div class="col-sm-10">
-              <input type="text"  name="tahun_terbit" class="form-control" id="tahun_terbit" placeholder="">
+              <input type="text"  name="harga" class="form-control" id="harga" placeholder="" value="<?php echo $harga?>">
             </div>
           </div>
 
