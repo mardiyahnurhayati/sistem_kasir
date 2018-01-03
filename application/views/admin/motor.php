@@ -49,7 +49,7 @@
 
             <td style="text-align:center">
                 <a href="<?php echo base_url()."Admin/delete_motor/".$value->PLATNOMOR; ?>" class="btn btn-warning"><i class="fa fa-times" aria-hidden="true"></i></a>
-                <a href="<?php echo base_url()."Admin/edit";?>" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="<?php echo base_url()."Admin/edit/".$value->PLATNOMOR;;?>" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i></a>
             </td>
             </tr>
             <?php } ?>

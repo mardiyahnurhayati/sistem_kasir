@@ -33,7 +33,10 @@
           <div class="form-group row">
             <label for="alamat" class="col-sm-2 col-form-label">Type</label>
             <div class="col-sm-10">
-              <select class="form-control" name="level"></select>
+              <select class="form-control" name="type">
+                <option value="admin">Admin</option>
+                <option value="kasir">Kasir</option>
+              </select>
             </div>
           </div>
 

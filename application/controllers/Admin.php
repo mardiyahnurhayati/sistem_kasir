@@ -115,11 +115,11 @@ class  Admin extends CI_Controller {
             'id_tarif'  => $this->input->post('id_tarif'),
             'harga' => $this->input->post('harga'),
         );
-        $data = $this->m_data->insert('tb_tarif', $data);
+        $data = $this->m_data->Insert('tb_tarif', $data);
         redirect('Admin/tampil_tarif');
     }
 
-    function edit_tarif($id_user){
+    function edit_tarif($id_tarif=0){
         $this->load->model('m_data');
         $ks = $this->m_data->getTarif('tb_user', array('id_user' => $id_user));
         $data = array(
@@ -228,13 +228,6 @@ class  Admin extends CI_Controller {
         redirect('Admin/tampil_kasir');
     }
 
-
-    function pelanggan_edit(){
-        $this->load->view('admin/header_admin');
-        $this->load->view('admin/pelanggan_edit');
-        $this->load->view('admin/footer_admin');
-    }
-
     
     function edit_pelanggan($id_pelanggan){
         $this->load->model('m_data');
@@ -335,27 +328,43 @@ class  Admin extends CI_Controller {
         redirect('Admin/tampil_motor');
     }
     
-    function edit($platnomor){
-        $where=array('platnomor' => $platnomor);
-        $data['tb_kendaraan'] =$this->m_data->edit_data($where,'tb_kendaraan')->result();
+    function edit($platnomor=0){
+       $this->load->model('m_data');
+        $ks = $this->m_data->GetWhere('tb_kendaraan', array('platnomor' => $platnomor));
+        $data = array(
+            'platnomor' => $ks[0]['platnomor'],
+            'id_merk' => $ks[0]['id_merk'],
+            'warna' => $ks[0]['warna'],
+            'tahunterbit' => $ks[0]['tahunterbit'],
+            'status' => $ks[0]['status'],
+            
+            );
+        $this->load->view('admin/header_admin');
         $this->load->view('Admin/motor_edit',$data);
+        $this->load->view('admin/footer_admin');
     }
 
      function update_motor($platnomor){
-        $platnomor=$this->input->post('platnomor');
-        $id_merk=$this->input->post('id_merk');
-        $warna=$this->input->post('warna');
-        $tahunterbit=$this->input->post('tahunterbit');
+        $platnomor = $_POST['platnomor'];
+        $id_merk = $_POST['id_merk'];
+        $warna = $_POST['warna'];
+        $tahunterbit = $_POST['tahunterbit'];
+
         $data = array(
-            'platnomor' => $ks->platnomor,
-            'id_merk' => $ks->id_merk,
-            'warna' => $ks->warna,
-            'tahunterbit' => $ks->tahunterbit,   
-            );
-        $where=array(
-            'platnomor'=>$platnomor);
-        $this->m_data->Update('tb_kendaraan', $data, $where);
-        redirect('Admin/tampil_motor'); 
+            'platnomor' => $platnomor,
+            'id_merk' => $id_merk,
+            'warna' => $warna,
+            'tahunterbit' => $tahunterbit,
+            'status'=>"bebas"
+         );
+        $where = array(
+            'platnomor' => $platnomor,
+        );
+        $this->load->model('m_data');
+        $res = $this->m_data->Update('tb_kendaraan', $data, $where);
+        if ($res>0) {
+            redirect('Admin/tampil_motor');
+        }
     }
 
     

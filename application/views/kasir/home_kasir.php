@@ -67,6 +67,29 @@
 			        	
 			      </div>
 			    </div>
+			     <div class="form-group">
+			      <label class="control-label col-md-3" 
+			      	for="pilih_tarif">Id Tarif :</label>
+			      <div class="col-md-5">
+			        <input list="list_Tarif" class="form-control inputs lst" 
+			        	placeholder="Isi id Tarif" name="pilih_tarif" id="pilih_tarif" 
+			        	autocomplete="off">
+			        	<datalist id="list_Tarif">
+			        	<?php foreach ($tarif as $value) {?>
+			        		<option value="<?=$value->ID_TARIF?>"><?=$value->MERK_MOTOR?></option><?php } ?>
+			        	</datalist>
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      <label class="control-label col-md-3" 
+			      	for="Keluar">Lama sewa :</label>
+			      <div class="col-md-5">
+			        <input  type="text" class="form-control lama" 
+			        	placeholder="Isi Jam Kembali" name="lama" id="lama" readonly="readonly"
+			        	>
+			        	
+			      </div>
+			    </div>
 			    <div class="form-group">
 			      <label class="control-label col-md-3" 
 			      	for="Keluar">Tgl Kembali :</label>
@@ -82,26 +105,14 @@
 			      	for="Keluar">Jam Kembali :</label>
 			      <div class="col-md-5">
 			        <input  type="time" class="form-control reset" 
-			        	placeholder="Isi Jam Kembali" name="Keluar" id="Keluar" 
+			        	placeholder="Isi Jam Kembali" name="Keluar" id="Keluar"
 			        	>
 			        	
 			      </div>
 			    </div>
 
 			    
-			    <div class="form-group">
-			      <label class="control-label col-md-3" 
-			      	for="pilih_tarif">Id Tarif :</label>
-			      <div class="col-md-5">
-			        <input list="list_Tarif" class="form-control inputs lst" 
-			        	placeholder="Isi id Tarif" name="pilih_tarif" id="pilih_tarif" 
-			        	autocomplete="off">
-			        	<datalist id="list_Tarif">
-			        	<?php foreach ($tarif as $value) {?>
-			        		<option value="<?=$value->ID_TARIF?>"><?=$value->MERK_MOTOR?></option><?php } ?>
-			        	</datalist>
-			      </div>
-			    </div>
+			   
 
 			   
 			    
@@ -117,7 +128,7 @@
 				    </div>
 				    <div class="form-group">
 				      <label for="bayar" class="besar">Bayar (Rp) :</label>
-				        <input type="text" class="form-control input-lg uang" 
+				        <input type="text" class="form-control inputs bayar" 
 				        	name="bayar" placeholder="0" autocomplete="off"
 				        	id="bayar">
 				    </div>
@@ -148,17 +159,34 @@
 		$.post("<?=base_url()?>Kasir/get_tarif",{id:id}, function(data){
 			var duce = jQuery.parseJSON(data);
 			var harga = duce.harga;
+			var jam=duce.jam;
 			$('#total').val(harga);
+			$('#lama').val(jam);
+
+
 		});
 	
 	});	
 	$(document).on('keydown', '.bayar', function(e) {
-			var bayar = $('.bayar').val();
+		var bayar = $('#bayar').val();
 	  	var total = $('#total').val();
 	  	var kembalian = bayar-total;
-	  	$('.kembali').val(kembalian);
+	  	$('#kembali').val(kembalian);
 
 		});
+	$(document).on('keydown', '.lst', function(e) {
+	  
+	  	var id=$('#pilih_tarif').val();
+		$.post("<?=base_url()?>Kasir/get_tanggal",{id:id}, function(data){
+			var duce = jQuery.parseJSON(data);
+			var tanggal = duce.tgl_kembali;
+			$('#tgl_kembali').val(tanggal);
+
+
+		});
+	
+	});	
+
 </script>
 
       

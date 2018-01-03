@@ -33,6 +33,16 @@
           </div>
 
           <div class="form-group row">
+            <label for="alamat" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="type">
+                <option value="admin">Admin</option>
+                <option value="kasir">Kasir</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
             <input type="text"  name="nama" class="form-control" id="nama"  value="<?php echo $nama?>">

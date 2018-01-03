@@ -74,8 +74,9 @@ class  Kasir extends CI_Controller {
         $data['id_Kendaraan']=$this->input->post('id_Kendaraan');
         $data['id_Tarif']=$this->input->post('id_Tarif');
         $data['jamrental']=$this->input->post('masuk');
-        $data['qty']=$this->input->post('qty');
-        $data = [];
+        $data['jamkembali']=$this->input->post('keluar');
+        
+        
 
         $html=$this->load->view('kasir/nota', $data, true);
         $pdfFilePath = "output_pdf_name.pdf";
@@ -89,5 +90,12 @@ class  Kasir extends CI_Controller {
         //download it.
         // $this->m_pdf->pdf->Output($pdfFilePath, "D");
         $this->m_pdf->pdf->Output();   
+    }
+    function get_tanggal(){
+        date_default_timezone_get('Asia/Jakarta');
+        $lama=$this->input->post('lama');
+        $tambah_tanggal=mktime(0,0,0,date('H')+$lama);
+        $data['tgl_kembali']=date('d-m-Y',$tambah_tanggal);
+        
     }
 }

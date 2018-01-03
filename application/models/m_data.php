@@ -89,8 +89,9 @@ class M_data extends CI_Model{
     }
 
     function get_rincian_tarif($id){
-      $this->db->where('id_tarif',$id);
-    return $this->db->get('tb_tarif')->row();
+       $this->db->join('tb_jam j', 'j.id_jam=t.id_jam');
+       $this->db->where('t.id_tarif',$id);
+      return $this->db->get('tb_tarif t')->row();
     }   
 }
 ?>
